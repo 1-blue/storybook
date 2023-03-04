@@ -16,7 +16,9 @@
     "react",
     "storybook"
   ],
-  "author": "1-blue",
+  "author": {
+    "name": "1-blue"
+  },
   "license": "ISC",
   "dependencies": {
     "core-js": "^3.28.0",
@@ -60,5 +62,6 @@
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1",
     "webpack-merge": "^5.8.0"
-  }
+  },
+  "_id": "storybook_from_1-blue@1.0.0"
 }

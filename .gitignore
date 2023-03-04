@@ -2,3 +2,6 @@
 
 # 번들링 결과물
 /dist
+
+# 스토리북
+/build-storybook.log

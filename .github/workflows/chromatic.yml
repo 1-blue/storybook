@@ -1,0 +1,16 @@
+name: 'Chromatic Deployment'
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: yarn
+      - uses: chromaui/action@v1
+        with:
+          # "chromatic"에서 제공한 토큰 ( "GitHub"에 직접 등록 )
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          # "GitHub Actions"에서 제공해주는 토큰
+          token: ${{ secrets.GITHUB_TOKEN }}
