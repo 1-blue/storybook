@@ -1,13 +1,53 @@
-// components
-import Dropdown from "@src/components/stories/common/Dropdown";
+import { useCallback, useMemo, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 
+// global-setting
+import { GlobalStyle } from "@src/shared/global";
+import theme, { darkTheme, lightTheme } from "@src/shared/theme";
+
+// layout
+import Layout from "@src/components/Layout";
+
+// page component
+import Root from "@src/components/pages/Root";
+
+// type
+import type { Theme } from "@src/shared/theme";
+
+/** 2023/03/10 - 각종 "Provider", 스타일, 레이아웃 HOC, 라우팅 적용 컴포넌트 - by 1-blue */
 const App = () => {
-  return (
-    <>
-      <h1>Hello, StoryBook</h1>
+  /** 2023/03/10 - 현재 테마 - by 1-blue */
+  const [isDark, setIsDark] = useState(false);
 
-      <Dropdown title="드롭다운" list={["사과", "딸기", "바나나"]} />
-    </>
+  /** 2023/03/07 - 현재 테마에 맞는 색상 지정 - by 1-blue */
+  const myTheme: Theme = useMemo(
+    () => ({
+      ...theme,
+      colors: {
+        ...theme.colors,
+        ...(isDark ? darkTheme : lightTheme),
+      },
+      isDark,
+    }),
+    [theme, isDark]
+  );
+
+  /** 2023/03/07 - theme toggle - by 1-blue */
+  const onToggleTheme = useCallback(() => setIsDark((prev) => !prev), []);
+
+  return (
+    <ThemeProvider theme={myTheme}>
+      <GlobalStyle />
+
+      <Layout onToggleTheme={onToggleTheme}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Root />} />
+          </Routes>
+        </BrowserRouter>
+      </Layout>
+    </ThemeProvider>
   );
 };
 

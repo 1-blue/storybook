@@ -1,3 +1,6 @@
+import { css } from "styled-components";
+
+/** 자주 사용하는 색상들 */
 const colors = {
   slate50: "#f8fafc",
   slate100: "#f1f5f9",
@@ -230,10 +233,94 @@ const colors = {
   main700: "#4338ca",
   main800: "#3730a3",
   main900: "#312e81",
+
+  color: "",
+  bgColor: "",
+  gray: "",
 };
+
+/** 검정 배경 */
+export const darkTheme = {
+  color: "#20262E",
+  bgColor: "#F5F4F4",
+  gray: "#343434",
+};
+/** 흰색 배경 */
+export const lightTheme = {
+  color: "#F5F4F4",
+  bgColor: "#20262E",
+  gray: "#D9D9D9",
+};
+
+/** 반응형 사이즈 */
+const mediaSize = {
+  xs: `screen and (max-width: 400px)`,
+  sm: `screen and (max-width: 640px)`,
+  md: `screen and (max-width: 768px)`,
+  lg: `screen and (max-width: 1024px)`,
+  xl: `screen and (max-width: 1280px)`,
+  "2xl": `screen and (max-width: 1536px)`,
+};
+
+/** 폰트 크기 */
+const fontSize = {
+  xs: "0.75rem",
+  sm: "0.875rem",
+  md: "1rem",
+  lg: "1.125rem",
+  xl: "1.25rem",
+  "2xl": "1.5rem",
+};
+
+/** 그 외의 크기 */
+const size = {
+  xs: "0.2em",
+  sm: "0.4em",
+  md: "0.6em",
+  lg: "1em",
+  xl: "1.4em",
+  "2xl": "1.6em",
+};
+
+/** 유틸리티 */
+const util = {
+  truncate: () => css`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  `,
+
+  scroll: () => css`
+    &::-webkit-scrollbar {
+      /** 스크롤바의 너비 */
+      width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      /** 스크롤바 길이 */
+      height: 25%;
+      /** 스크롤바의 색상 */
+      background: ${({ theme }) => theme.colors.indigo600};
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      /** 스크롤바 뒷 배경 색상 */
+      background: ${({ theme }) => theme.colors.indigo300};
+    }
+  `,
+};
+
+/** 현재 상태 ( true: "dark" ) / ( false: "light" ) */
+const isDark = false;
 
 const theme = {
   colors,
+  mediaSize,
+  fontSize,
+  size,
+  util,
+  isDark,
 };
 
 export default theme;
+
+export type Theme = typeof theme;

@@ -24,8 +24,10 @@ export const GlobalStyle = createGlobalStyle`
   body{
     line-height: 1;
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: #F6F9F0;
     margin-bottom: 100px;
+
+    color: ${({ theme }) => theme.colors.color};
+    background-color: ${({ theme }) => theme.colors.bgColor};
   }
   ol, ul, li{
     list-style: none;
@@ -36,5 +38,34 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     padding: 0;
     margin: 0;
+  }
+
+  /** FIXME: 애니메이션 */
+  @-webkit-keyframes skeleton-gradient {
+    0% {
+      background-color: rgba(165, 165, 165, 0.5);
+    }
+
+    50% {
+      background-color: rgba(165, 165, 165, 0.8);
+    }
+
+    100% {
+      background-color: rgba(165, 165, 165, 0.5);
+    }
+  }
+
+  @keyframes skeleton-gradient {
+    0% {
+      background-color: rgba(165, 165, 165, 0.5);
+    }
+
+    50% {
+      background-color: rgba(165, 165, 165, 0.8);
+    }
+
+    100% {
+      background-color: rgba(165, 165, 165, 0.5);
+    }
   }
 `;

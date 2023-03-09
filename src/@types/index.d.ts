@@ -2,7 +2,7 @@
 export type State = "pending" | "fulfilled" | "rejected";
 
 /** 2023/03/03 -  크기 - by 1-blue */
-export type Size = "tiny" | "small" | "medium" | "large";
+export type Size = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 
 /** 2023/03/04 - 형태 - by 1-blue */
 export type Shape = "primary" | "secondary" | "tertiary";
@@ -15,6 +15,6 @@ export type IconShape =
   | "star"
   | "ellipsis-horizontal"
   | "chevron-down"
-  | "chevron-up";
-
-export * from "./todo";
+  | "chevron-up"
+  | "sun"
+  | "moon";
