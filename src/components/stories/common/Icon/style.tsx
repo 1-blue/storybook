@@ -6,38 +6,67 @@ type StyledProps = Pick<Props, "size" | "hover">;
 
 /** 2023/03/03 - 아이콘 스타일 컴포넌트 - by 1-blue */
 const StyledIcon = styled.svg<StyledProps>`
-  /* pointer-events: none; */
+  color: ${({ theme, color }) => color || theme.colors.color};
 
+  transition: all 0.2s;
+
+  /** 크기 */
   ${({ size }) => {
     switch (size) {
-      case "tiny":
+      case "xs":
         return css`
           width: 1em;
           height: 1em;
         `;
-      case "small":
+      case "sm":
         return css`
           width: 1.4em;
           height: 1.4em;
         `;
-      case "medium":
+      case "md":
         return css`
           width: 1.8em;
           height: 1.8em;
         `;
-      case "large":
+      case "lg":
         return css`
           width: 2.4em;
           height: 2.4em;
         `;
+      case "xl":
+        return css`
+          width: 2.8em;
+          height: 2.8em;
+        `;
+      case "2xl":
+        return css`
+          width: 3.2em;
+          height: 3.2em;
+        `;
     }
   }}
 
-  &:hover {
-    color: ${({ hover }) => hover};
-  }
+  /** "hover"에 대한 정의가 있다면 */
+  ${({ hover }) =>
+    hover
+      ? css`
+          cursor: pointer;
+
+          &:hover {
+            color: ${({}) => hover};
+          }
+        `
+      : css`
+          cursor: auto;
+        `}
+
+  /** 아이콘 hover ( 버튼에 감싸져 있다면 버튼에 hover 시 실행 ) */
   button:hover & {
     color: ${({ hover }) => hover};
+    stroke-width: ${({ strokeWidth }) => strokeWidth && +strokeWidth + 1};
+  }
+  button:hover & {
+    cursor: pointer;
   }
 `;
 

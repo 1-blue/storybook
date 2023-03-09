@@ -1,4 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback } from "react";
+
+// hook
+import useClose from "@src/hooks/useClose";
 
 // component
 import Icon from "@src/components/stories/common/Icon";
@@ -7,64 +10,54 @@ import Icon from "@src/components/stories/common/Icon";
 import StyledDropdown from "./style";
 
 // type
-type Props = {
+import type { Size } from "@src/@types";
+type Type = "basic" | "option";
+export type Props = {
+  type?: Type;
   title?: string;
-  isOption?: boolean;
   list: string[];
+  size?: Size;
 };
 
-const Dropdown = ({ title, isOption, list }: Props) => {
-  /** 2023/03/04 - 드롭다운 보여줄지 여부 - by 1-blue */
-  const [show, setShow] = useState(false);
-  /** 2023/03/04 - 드롭다운 ref - by 1-blue */
-  const dropdownRef = useRef<null | HTMLUListElement>(null);
-
+/** 2023/03/10 - 드롭다운 컴포넌트 - by 1-blue */
+const Dropdown = ({ type = "basic", title, list, size = "md" }: Props) => {
+  /** 2023/03/09 - 외부 클릭 시 드롭다운 닫기 - by 1-blue */
+  const [show, containerRef, setShow] = useClose<HTMLUListElement>();
   /** 2023/03/04 - toggle dropdown - by 1-blue */
   const toggleDropdown = useCallback(() => setShow((prev) => !prev), []);
 
-  /** 2023/03/04 - 드롭다운 외부 클릭 시 닫기 이벤트 등록 - by 1-blue */
-  useEffect(() => {
-    const handleOutsideClose = (e: MouseEvent) => {
-      // 클릭 이벤트 발생지가 "element"인지 확인
-      if (!(e.target instanceof HTMLElement)) return;
-
-      /**
-       * 현재 열려있고, 드롭다운이 포함한 엘리먼트가 아니라면
-       * 즉, 드롭다운 외부를 클릭한다면 닫기
-       */
-      if (
-        show &&
-        (!dropdownRef.current || !dropdownRef.current.contains(e.target))
-      ) {
-        setShow(false);
-      }
-    };
-
-    // 드롭다운 닫기 이벤트 등록
-    document.addEventListener("click", handleOutsideClose);
-
-    // 드롭다운 닫기 이벤트 해제
-    return () => document.removeEventListener("click", handleOutsideClose);
-  }, [show]);
+  /** 2023/03/10 - 드롭다운 종류에 따른 컴포넌트 제작 - by 1-blue */
+  const getDropDown = useCallback(() => {
+    switch (type) {
+      case "basic":
+        return (
+          <button type="button" onClick={toggleDropdown} data-type="normal">
+            <b>{title}</b>
+            <Icon
+              shape={show ? "chevron-up" : "chevron-down"}
+              size={size}
+              minSize="sm"
+              maxSize="md"
+            />
+          </button>
+        );
+      case "option":
+        return (
+          <button type="button" onClick={toggleDropdown} data-type="option">
+            <Icon
+              shape="ellipsis-horizontal"
+              size={size}
+              minSize="md"
+              maxSize="lg"
+            />
+          </button>
+        );
+    }
+  }, [type, title, show, size]);
 
   return (
-    <StyledDropdown show={show} ref={dropdownRef}>
-      {title && (
-        <button type="button" onClick={toggleDropdown} data-type="normal">
-          <b>{title}</b>
-          <Icon
-            shape={show ? "chevron-up" : "chevron-down"}
-            size="tiny"
-            color="#4b5563"
-            hover={show ? "#2563eb" : "#60a5fa"}
-          />
-        </button>
-      )}
-      {isOption && (
-        <button type="button" onClick={toggleDropdown} data-type="option">
-          <Icon shape="ellipsis-horizontal" color="#4b5563" hover="#1f2937" />
-        </button>
-      )}
+    <StyledDropdown show={show} size={size} ref={containerRef}>
+      {getDropDown()}
 
       {show && (
         <ul>

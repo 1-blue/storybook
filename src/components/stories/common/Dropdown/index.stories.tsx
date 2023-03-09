@@ -1,5 +1,5 @@
 // component
-import Dropdown from "./index";
+import Dropdown from ".";
 
 // type
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
@@ -8,15 +8,23 @@ export default {
   title: "Common/Dropdown",
   component: Dropdown,
 
+  args: {
+    size: "md",
+  },
   argTypes: {
-    title: {
-      control: { type: null },
+    type: {
+      control: { type: "radio" },
+      options: ["basic", "option"],
     },
-    isOption: {
-      control: { type: null },
+    title: {
+      control: { type: "none" },
     },
     list: {
       control: { type: "object" },
+    },
+    size: {
+      control: { type: "radio" },
+      options: ["xs", "sm", "md", "lg"],
     },
   },
 } as ComponentMeta<typeof Dropdown>;
@@ -27,6 +35,7 @@ const Template: ComponentStory<typeof Dropdown> = (args) => (
 
 export const Normal = Template.bind({});
 Normal.args = {
+  type: "basic",
   title: "일반 드롭다운",
   list: [
     "apple",
@@ -53,6 +62,11 @@ Normal.argTypes = {
 
 export const Option = Template.bind({});
 Option.args = {
-  isOption: true,
+  type: "option",
   list: ["즐겨찾기", "삭제", "수정", "좋아요", "스토리북"],
+};
+Option.argTypes = {
+  type: {
+    control: { type: null },
+  },
 };
