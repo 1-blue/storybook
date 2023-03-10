@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 // type
 import type { Props } from ".";
-type StlyedProps = Pick<Props, "size"> & { show: boolean };
+type StlyedProps = Pick<Props, "size" | "reverse"> & { show: boolean };
 
 const StyledDropdown = styled.section<StlyedProps>`
   position: relative;
@@ -13,9 +13,12 @@ const StyledDropdown = styled.section<StlyedProps>`
   & > button[data-type="normal"],
   & > ul {
     font-size: ${({ theme, size }) => theme.fontSize[size || "md"]};
-    color: ${({ theme }) => theme.colors.color};
-    background-color: ${({ theme }) => theme.colors.bgColor};
-    border: 2px solid ${({ theme }) => theme.colors.color};
+    color: ${({ theme, reverse }) =>
+      theme.colors[reverse ? "bgColor" : "color"]};
+    background-color: ${({ theme, reverse }) =>
+      theme.colors[reverse ? "color" : "bgColor"]};
+    border: 2px solid
+      ${({ theme, reverse }) => theme.colors[reverse ? "bgColor" : "color"]};
 
     ${({ size }) => {
       switch (size) {
@@ -61,7 +64,7 @@ const StyledDropdown = styled.section<StlyedProps>`
 
     border-radius: 50%;
 
-    ${({ size }) => {
+    ${({ size, reverse }) => {
       switch (size) {
         case "xs":
           return css`
@@ -71,7 +74,8 @@ const StyledDropdown = styled.section<StlyedProps>`
 
             & + ul {
               border-radius: 0.2em;
-              border-top: 3px solid ${({ theme }) => theme.colors.color};
+              border-top: 3px solid
+                ${({ theme }) => theme.colors[reverse ? "bgColor" : "color"]};
             }
           `;
         case "sm":
@@ -82,7 +86,8 @@ const StyledDropdown = styled.section<StlyedProps>`
 
             & + ul {
               border-radius: 0.2em;
-              border-top: 3px solid ${({ theme }) => theme.colors.color};
+              border-top: 3px solid
+                ${({ theme }) => theme.colors[reverse ? "bgColor" : "color"]};
             }
           `;
         case "md":
@@ -93,7 +98,8 @@ const StyledDropdown = styled.section<StlyedProps>`
 
             & + ul {
               border-radius: 0.2em;
-              border-top: 4px solid ${({ theme }) => theme.colors.color};
+              border-top: 4px solid
+                ${({ theme }) => theme.colors[reverse ? "bgColor" : "color"]};
             }
           `;
         case "lg":
@@ -104,17 +110,20 @@ const StyledDropdown = styled.section<StlyedProps>`
 
             & + ul {
               border-radius: 0.2em;
-              border-top: 4px solid ${({ theme }) => theme.colors.color};
+              border-top: 4px solid
+                ${({ theme }) => theme.colors[reverse ? "bgColor" : "color"]};
             }
           `;
       }
     }}
 
     &:hover {
-      background-color: ${({ theme }) => theme.colors.color};
+      background-color: ${({ theme, reverse }) =>
+        theme.colors[reverse ? "bgColor" : "color"]};
 
       & svg {
-        color: ${({ theme }) => theme.colors.bgColor};
+        color: ${({ theme, reverse }) =>
+          theme.colors[reverse ? "color" : "bgColor"]};
       }
     }
   }
@@ -143,7 +152,8 @@ const StyledDropdown = styled.section<StlyedProps>`
 
       padding: 0.4em 0.6em;
 
-      color: ${({ theme }) => theme.colors.color};
+      color: ${({ theme, reverse }) =>
+        theme.colors[reverse ? "bgColor" : "color"]};
 
       white-space: nowrap;
       text-align: left;
@@ -154,8 +164,10 @@ const StyledDropdown = styled.section<StlyedProps>`
 
       &:hover {
         font-weight: bold;
-        color: ${({ theme }) => theme.colors.bgColor};
-        background-color: ${({ theme }) => theme.colors.color};
+        color: ${({ theme, reverse }) =>
+          theme.colors[reverse ? "color" : "bgColor"]};
+        background-color: ${({ theme, reverse }) =>
+          theme.colors[reverse ? "bgColor" : "color"]};
       }
     }
   }

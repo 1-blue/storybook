@@ -17,10 +17,17 @@ export type Props = {
   title?: string;
   list: string[];
   size?: Size;
+  reverse?: boolean;
 };
 
 /** 2023/03/10 - 드롭다운 컴포넌트 - by 1-blue */
-const Dropdown = ({ type = "basic", title, list, size = "md" }: Props) => {
+const Dropdown = ({
+  type = "basic",
+  title,
+  list,
+  size = "md",
+  reverse = false,
+}: Props) => {
   /** 2023/03/09 - 외부 클릭 시 드롭다운 닫기 - by 1-blue */
   const [show, containerRef, setShow] = useClose<HTMLUListElement>();
   /** 2023/03/04 - toggle dropdown - by 1-blue */
@@ -49,6 +56,7 @@ const Dropdown = ({ type = "basic", title, list, size = "md" }: Props) => {
               size={size}
               minSize="md"
               maxSize="lg"
+              reverse={reverse}
             />
           </button>
         );
@@ -56,7 +64,12 @@ const Dropdown = ({ type = "basic", title, list, size = "md" }: Props) => {
   }, [type, title, show, size]);
 
   return (
-    <StyledDropdown show={show} size={size} ref={containerRef}>
+    <StyledDropdown
+      show={show}
+      size={size}
+      reverse={reverse}
+      ref={containerRef}
+    >
       {getDropDown()}
 
       {show && (
