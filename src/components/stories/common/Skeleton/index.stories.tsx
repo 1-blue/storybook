@@ -27,3 +27,8 @@ export const Keyword = Template.bind({});
 Keyword.args = {
   type: "keyword",
 };
+
+export const TodoList = Template.bind({});
+TodoList.args = {
+  type: "todoList",
+};

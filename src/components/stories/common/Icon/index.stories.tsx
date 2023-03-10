@@ -20,6 +20,8 @@ const shape: IconShape[] = [
   "ellipsis-horizontal",
   "sun",
   "moon",
+  "bars-arrow-down",
+  "bars-arrow-up",
 ];
 
 export default {

@@ -237,6 +237,7 @@ const colors = {
   color: "",
   bgColor: "",
   gray: "",
+  bgGray: "",
 };
 
 /** 검정 배경 */
@@ -244,12 +245,14 @@ export const darkTheme = {
   color: "#20262E",
   bgColor: "#F5F4F4",
   gray: "#343434",
+  bgGray: "#D9D9D9",
 };
 /** 흰색 배경 */
 export const lightTheme = {
   color: "#F5F4F4",
   bgColor: "#20262E",
   gray: "#D9D9D9",
+  bgGray: "#343434",
 };
 
 /** 반응형 사이즈 */
@@ -306,6 +309,14 @@ const util = {
       /** 스크롤바 뒷 배경 색상 */
       background: ${({ theme }) => theme.colors.indigo300};
     }
+  `,
+
+  /** 2023/03/10 - 텍스트 라인 제한 - by 1-blue */
+  lineClamp: (line: number) => css`
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: ${() => line};
+    overflow: hidden;
   `,
 };
 

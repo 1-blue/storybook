@@ -17,4 +17,8 @@ export type IconShape =
   | "chevron-down"
   | "chevron-up"
   | "sun"
-  | "moon";
+  | "moon"
+  | "bars-arrow-down"
+  | "bars-arrow-up";
+
+export * from "./data";

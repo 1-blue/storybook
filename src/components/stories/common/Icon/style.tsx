@@ -2,11 +2,12 @@ import styled, { css } from "styled-components";
 
 // type
 import type { Props } from ".";
-type StyledProps = Pick<Props, "size" | "hover">;
+type StyledProps = Pick<Props, "size" | "hover" | "reverse">;
 
 /** 2023/03/03 - 아이콘 스타일 컴포넌트 - by 1-blue */
 const StyledIcon = styled.svg<StyledProps>`
-  color: ${({ theme, color }) => color || theme.colors.color};
+  color: ${({ theme, color, reverse }) =>
+    color || theme.colors[reverse ? "bgColor" : "color"]};
 
   transition: all 0.2s;
 
@@ -60,12 +61,17 @@ const StyledIcon = styled.svg<StyledProps>`
           cursor: auto;
         `}
 
+  /** 버튼의 하위요소인 경우 */
+  button > & {
+    pointer-events: none;
+  }
+
   /** 아이콘 hover ( 버튼에 감싸져 있다면 버튼에 hover 시 실행 ) */
-  button:hover & {
+  button:hover > & {
     color: ${({ hover }) => hover};
     stroke-width: ${({ strokeWidth }) => strokeWidth && +strokeWidth + 1};
   }
-  button:hover & {
+  button:hover > & {
     cursor: pointer;
   }
 `;
