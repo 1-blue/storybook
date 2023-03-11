@@ -8,8 +8,11 @@ type UseCloseReturnType<T extends HTMLElement> = [
   Dispatch<SetStateAction<boolean>>
 ];
 
-/** 2023/03/06 - 외부 클릭 시 닫는 훅 - by 1-blue */
-function useClose<T extends HTMLElement>(): UseCloseReturnType<T> {
+/**
+ * 2023/03/06 - 외부 클릭 시 닫는 훅 - by 1-blue
+ * @returns [보여줄지여부 state, 컨테이너 ref, 보여줄지여부 setState]
+ */
+const useClose = <T extends HTMLElement>(): UseCloseReturnType<T> => {
   /** 2023/03/06 - 보여줄지 여부 - by 1-blue */
   const [show, setShow] = useState(false);
 
@@ -42,6 +45,6 @@ function useClose<T extends HTMLElement>(): UseCloseReturnType<T> {
   }, [show]);
 
   return [show, containerRef, setShow];
-}
+};
 
 export default useClose;

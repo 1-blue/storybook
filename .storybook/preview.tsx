@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import { GlobalStyle } from "../src/shared/global";
@@ -44,7 +45,9 @@ export const decorators = [
           <ThemeToggle onToggleTheme={() => setIsDark((prev) => !prev)} />
 
           <GlobalStyle />
-          <Story />
+          <BrowserRouter>
+            <Story />
+          </BrowserRouter>
         </section>
       </ThemeProvider>
     );

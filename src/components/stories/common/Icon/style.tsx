@@ -61,17 +61,19 @@ const StyledIcon = styled.svg<StyledProps>`
           cursor: auto;
         `}
 
-  /** 버튼의 하위요소인 경우 */
-  button > & {
+  /** 버튼/앵커의 하위요소인 경우 */
+  button > &, a > & {
     pointer-events: none;
   }
 
-  /** 아이콘 hover ( 버튼에 감싸져 있다면 버튼에 hover 시 실행 ) */
-  button:hover > & {
+  /** 아이콘 hover ( 버튼/앵커에 감싸져 있다면 버튼/앵커에 hover 시 실행 ) */
+  button:hover > &,
+  a:hover > & {
     color: ${({ hover }) => hover};
     stroke-width: ${({ strokeWidth }) => strokeWidth && +strokeWidth + 1};
   }
-  button:hover > & {
+  button:hover > &,
+  a:hover > & {
     cursor: pointer;
   }
 `;

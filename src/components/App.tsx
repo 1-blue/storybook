@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 // global-setting
@@ -9,8 +9,8 @@ import theme, { darkTheme, lightTheme } from "@src/shared/theme";
 // layout
 import Layout from "@src/components/Layout";
 
-// page component
-import Root from "@src/components/pages/Root";
+// router
+import router from "@src/router";
 
 // type
 import type { Theme } from "@src/shared/theme";
@@ -41,11 +41,7 @@ const App = () => {
       <GlobalStyle />
 
       <Layout onToggleTheme={onToggleTheme}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Root />} />
-          </Routes>
-        </BrowserRouter>
+        <RouterProvider router={router} />
       </Layout>
     </ThemeProvider>
   );

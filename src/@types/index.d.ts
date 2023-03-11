@@ -19,6 +19,11 @@ export type IconShape =
   | "sun"
   | "moon"
   | "bars-arrow-down"
-  | "bars-arrow-up";
+  | "bars-arrow-up"
+  | "home"
+  | "cog-6-tooth"
+  | "chat-bubble-bottom-center-text"
+  | "bell";
 
 export * from "./data";
+export * from "./navRouter";
