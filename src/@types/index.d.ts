@@ -25,5 +25,8 @@ export type IconShape =
   | "chat-bubble-bottom-center-text"
   | "bell";
 
+/** 2023/03/18 - 방향 - by 1-blue */
+export type Direction = "horizontal" | "vertical";
+
 export * from "./data";
 export * from "./navRouter";
